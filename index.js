@@ -1,3 +1,3 @@
 const { boostrap } = require('./src/start');
 
-boostrap().startApp();
+boostrap().startApp(3000);

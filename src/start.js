@@ -16,7 +16,7 @@ const loadAllRestRoutes = () => {
 };
 
 const boostrap = () => {
-  const startApp = () => {
+  const startApp = (port) => {
     router.get('/', async (ctx, next) => {
       ctx.body = appVersion;
       await next();
@@ -29,7 +29,7 @@ const boostrap = () => {
       .use(router.routes())
       .use(router.allowedMethods());
 
-    app.listen(3000);
+    app.listen(port);
   };
 
   return { startApp };

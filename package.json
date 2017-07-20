@@ -1,0 +1,30 @@
+{
+  "name": "apiduino",
+  "version": "1.0.0",
+  "description": "REST API for arduino-reader",
+  "main": "index.js",
+  "repository": "git@github.com:dankawka/apiduino.git",
+  "author": "Daniel Kawka <ileev@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/eslint . && ava --verbose",
+    "startDev": "./node_modules/.bin/nodemon --inspect=0.0.0.0:5858 --ignore test/ index.js",
+    "start": "node index.js"
+  },
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "eslint": "^4.2.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.7.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
+  },
+  "ava": {
+    "failWithoutAssertions": false
+  }
+}

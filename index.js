@@ -1,3 +1,3 @@
-const bootstrap = require('./src/start')();
+const { boostrap } = require('./src/start');
 
-bootstrap.startApp();
+boostrap().startApp();

@@ -1,16 +1,28 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const Router = require('koa-router');
+const glob = require('glob');
+const path = require('path');
+
+const app = new Koa();
+const router = new Router();
+
+const appVersion = require('../package.json').version;
+
+const loadAllRestRoutes = () => {
+  glob.sync(path.join(__dirname, './rest/*.js')).forEach((file) => {
+    require(path.resolve(file));
+  });
+};
 
 const boostrap = () => {
   const startApp = () => {
-    const app = new Koa();
-    const router = new Router();
-
     router.get('/', async (ctx, next) => {
-      ctx.body = {};
+      ctx.body = appVersion;
       await next();
     });
+
+    loadAllRestRoutes();
 
     app
       .use(bodyParser())
@@ -23,4 +35,4 @@ const boostrap = () => {
   return { startApp };
 };
 
-module.exports = boostrap;
+module.exports = { boostrap, router };

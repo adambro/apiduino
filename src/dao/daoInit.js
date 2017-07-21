@@ -4,4 +4,4 @@ const connectToDb = ({ host, port, dbName }) => {
   mongoose.connect(`mongodb://${host}:${port}/${dbName}`);
 };
 
-module.exports = { connectToDb };
+module.exports = { connectToDb, mongoose };

@@ -1,6 +1,9 @@
 const { router } = require('../start');
+const { create } = require('../activities/tempsActivities');
 
-router.get('/temps', async (ctx, next) => {
-  ctx.body = 123;
+router.post('/temps', async (ctx, next) => {
+  const createdTemp = await create(ctx.request.body);
+  ctx.body = createdTemp;
+  ctx.status = 201;
   await next();
 });

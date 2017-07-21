@@ -1,4 +1,7 @@
 {
+  "application": {
+    "mountPoint": "localhost:3000"
+  },
   "dbConfig": {
     "host": "localhost",
     "port": 27017,

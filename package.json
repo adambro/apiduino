@@ -7,8 +7,10 @@
   "author": "Daniel Kawka <ileev@hotmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "config": "^1.26.1",
     "glob": "^7.1.2",
+    "joi": "^10.6.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",

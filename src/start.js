@@ -9,7 +9,7 @@ const app = new Koa();
 const router = new Router();
 
 const appVersion = require('../package.json').version;
-const { connectToDb } = require('./db/db');
+const { connectToDb } = require('./dao/daoInit');
 
 const loadAllRestRoutes = () => {
   glob.sync(path.join(__dirname, './rest/*.js')).forEach((file) => {

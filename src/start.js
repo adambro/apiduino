@@ -3,11 +3,13 @@ const bodyParser = require('koa-bodyparser');
 const Router = require('koa-router');
 const glob = require('glob');
 const path = require('path');
+const config = require('config');
 
 const app = new Koa();
 const router = new Router();
 
 const appVersion = require('../package.json').version;
+const { connectToDb } = require('./db/db');
 
 const loadAllRestRoutes = () => {
   glob.sync(path.join(__dirname, './rest/*.js')).forEach((file) => {
@@ -17,6 +19,8 @@ const loadAllRestRoutes = () => {
 
 const boostrap = () => {
   const startApp = (port) => {
+    connectToDb(config.get('dbConfig'));
+
     router.get('/', async (ctx, next) => {
       ctx.body = appVersion;
       await next();

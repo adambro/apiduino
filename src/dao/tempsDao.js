@@ -22,7 +22,7 @@ const daoGetStats = async () => {
     lowestTemp: lowest[0].toObject().temp,
     newestMeasurement: newestDate[0].toObject().createdAt,
     oldestMeasurement: oldestDate[0].toObject().createdAt,
-    total: await Temp.count(),
+    totalMeasurements: await Temp.count(),
   };
   return stats;
 };

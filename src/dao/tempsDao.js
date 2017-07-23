@@ -9,4 +9,6 @@ const Temp = mongoose.model('temp', new Schema({}, {
 
 const daoCreate = async payload => Temp.create(payload);
 
-module.exports = { daoCreate };
+const daoSearch = async () => Temp.find().sort({ _id: -1 }).limit(250);
+
+module.exports = { daoCreate, daoSearch };

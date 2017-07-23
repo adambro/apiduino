@@ -14,7 +14,6 @@ const create = async (payload) => {
 
 const search = async () => daoSearch();
 
-
 const getStats = async () => daoGetStats();
 
 module.exports = { create, search, getStats };

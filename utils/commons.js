@@ -1,5 +1,22 @@
 const _ = require('lodash');
 const Joi = require('joi');
+const winston = require('winston');
+const path = require('path');
+
+require('winston-daily-rotate-file');
+
+const transport = new (winston.transports.DailyRotateFile)({
+  filename: path.join(__dirname, '../log/log'),
+  datePattern: 'yyyy-MM-dd.',
+  prepend: true,
+  level: process.env.ENV === 'development' ? 'debug' : 'info',
+});
+
+const logger = new (winston.Logger)({
+  transports: [
+    transport,
+  ],
+});
 
 const stripTechnicalFields = (object) => {
   const technicalFields = ['__v', '_id'];
@@ -18,4 +35,4 @@ const validate = (payload, schema) => {
   throw error;
 };
 
-module.exports = { stripTechnicalFields, validate };
+module.exports = { stripTechnicalFields, validate, logger };

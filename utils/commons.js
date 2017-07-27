@@ -19,7 +19,7 @@ const logger = new (winston.Logger)({
 });
 
 const stripTechnicalFields = (object) => {
-  const technicalFields = ['__v', '_id'];
+  const technicalFields = ['__v', '_id', 'updatedAt', 'createdAt'];
   return _.omit(object, technicalFields);
 };
 

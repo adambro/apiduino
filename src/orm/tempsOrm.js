@@ -1,4 +1,4 @@
-const { mongoose } = require('./daoInit');
+const { mongoose } = require('./ormInit');
 
 const Schema = mongoose.Schema;
 
@@ -7,11 +7,11 @@ const Temp = mongoose.model('temp', new Schema({}, {
   timestamps: true,
 }));
 
-const daoCreate = async payload => Temp.create(payload);
+const ormCreate = async payload => Temp.create(payload);
 
-const daoSearch = async () => Temp.find().sort({ _id: -1 }).limit(250);
+const ormSearch = async () => Temp.find().sort({ _id: -1 }).limit(250);
 
-const daoGetStats = async () => {
+const ormGetStats = async () => {
   const highest = await Temp.find().sort({ temp: -1 }).limit(1);
   const lowest = await Temp.find().sort({ temp: 1 }).limit(1);
   const newestDate = await Temp.find().sort({ createdAt: -1 }).limit(1);
@@ -27,4 +27,4 @@ const daoGetStats = async () => {
   return stats;
 };
 
-module.exports = { daoCreate, daoSearch, daoGetStats };
+module.exports = { ormCreate, ormSearch, ormGetStats };

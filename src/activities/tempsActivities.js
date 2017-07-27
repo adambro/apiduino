@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { daoCreate, daoSearch, daoGetStats } = require('../dao/tempsDao');
+const { ormCreate, ormSearch, ormGetStats } = require('../orm/tempsOrm');
 const { validate } = require('../../utils/commons');
 
 const tempsSchema = Joi.object().keys({
@@ -9,11 +9,11 @@ const tempsSchema = Joi.object().keys({
 
 const create = async (payload) => {
   validate(payload, tempsSchema);
-  return daoCreate(payload);
+  return ormCreate(payload);
 };
 
-const search = async () => daoSearch();
+const search = async () => ormSearch();
 
-const getStats = async () => daoGetStats();
+const getStats = async () => ormGetStats();
 
 module.exports = { create, search, getStats };

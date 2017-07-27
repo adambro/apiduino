@@ -8,7 +8,7 @@ const config = require('config');
 const app = new Koa();
 const router = new Router();
 
-const { connectToDb } = require('./dao/daoInit');
+const { connectToDb } = require('./orm/ormInit');
 const { cors, errorCatcher } = require('./middlewares');
 
 const loadAllRestRoutes = () => {

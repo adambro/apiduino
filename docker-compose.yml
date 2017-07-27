@@ -1,11 +1,17 @@
 version: "3"
+
 services:
-  mongo:
+  apiduino:
+    build: .
+    volumes:
+      - ./service/log:/usr/src/app/log
+    command: ['sh', '-c', 'yarn start']
+    ports:
+    - 3000:3000
+    links:
+      - mongoDb
+
+  mongoDb:
     image: mongo:latest
     volumes:
       - /home/mongo:/data/db
-
-  service:
-    dockerfile: ./Dockerfile
-    volumes:
-      - ./service:/usr/src/app

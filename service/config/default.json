@@ -3,7 +3,7 @@
     "mountPoint": "localhost:3000"
   },
   "dbConfig": {
-    "host": "localhost",
+    "host": "mongoDb",
     "port": 27017,
     "dbName": "apiduino"
   }

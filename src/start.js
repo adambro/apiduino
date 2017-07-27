@@ -8,8 +8,8 @@ const config = require('config');
 const app = new Koa();
 const router = new Router();
 
-const appVersion = require('../package.json').version;
 const { connectToDb } = require('./dao/daoInit');
+const { cors, errorCatcher } = require('./middlewares');
 
 const loadAllRestRoutes = () => {
   glob.sync(path.join(__dirname, './rest/*.js')).forEach((file) => {
@@ -21,34 +21,14 @@ const boostrap = () => {
   const startApp = (port) => {
     connectToDb(config.get('dbConfig'));
 
-    app.use(async (ctx, next) => {
-      try {
-        await next();
-      } catch (err) {
-        ctx.status = err.status || 500;
-        ctx.body = err.message;
-        ctx.app.emit('error', err, ctx);
-      }
-    });
-
-    router.get('/', async (ctx, next) => {
-      ctx.body = appVersion;
-      await next();
-    });
-
     loadAllRestRoutes();
 
     app
+      .use(errorCatcher)
       .use(bodyParser())
       .use(router.routes())
-      .use(router.allowedMethods());
-
-    app.use(async (ctx, next) => {
-      ctx.set('Access-Control-Allow-Origin', '*');
-      ctx.set('Access-Control-Allow-Methods', '*');
-      ctx.set('Access-Control-Allow-Headers', 'content-type');
-      await next();
-    });
+      .use(router.allowedMethods())
+      .use(cors);
 
     app.listen(port);
   };

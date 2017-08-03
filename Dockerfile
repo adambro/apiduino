@@ -6,8 +6,11 @@ RUN apt-get -yq update && \
     curl -o- -L https://yarnpkg.com/install.sh | bash
 
 RUN mkdir -p /usr/src/app
+
 WORKDIR /usr/src/app
-ARG registry
+
 ADD ./service/ /usr/src/app
-RUN yarn
+
+CMD $HOME/.yarn/bin/yarn install
+
 EXPOSE 3000

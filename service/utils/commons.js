@@ -15,6 +15,7 @@ const transport = new (winston.transports.DailyRotateFile)({
 const logger = new (winston.Logger)({
   transports: [
     transport,
+    new (winston.transports.Console)(),
   ],
 });
 
